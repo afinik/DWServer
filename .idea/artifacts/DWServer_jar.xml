@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DWServer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DWServer_jar</output-path>
+    <root id="archive" name="DWServer.jar">
+      <element id="module-output" name="DWServer" />
+      <element id="module-output" name="DWNetwork" />
+    </root>
+  </artifact>
+</component>
