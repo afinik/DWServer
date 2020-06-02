@@ -1,4 +1,4 @@
-/*version server s0.001*/
+/*version server s0.002*/
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class ChatServer implements TCPConnectionListener {
 
     //if id doesn't exist - create a new session
 
-
+    double ACTUAL_CLIENT_VERSION = 0.002;
     boolean isExist = false;
     private static int currentSesId = 0;
     private String clientId;
@@ -163,7 +163,13 @@ public class ChatServer implements TCPConnectionListener {
                     //
                     if (!isExist) tcpConnection.sendString("Error: Сессия не найдена");
                     break;
-
+                case "vers.":
+                    double version = Double.parseDouble(value.substring(value.lastIndexOf("/") + 1));
+                    if (version < ACTUAL_CLIENT_VERSION) {
+                        tcpConnection.sendString("vers/old");
+                        System.out.println("Version of client is too old");
+                    }
+                    break;
                 default:
                     if (value.length() > 8)
                         System.out.println("С180 Отладка:" + value);
